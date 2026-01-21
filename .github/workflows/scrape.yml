@@ -1,0 +1,24 @@
+name: 每日数据采集
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # 每天北京时间早上 6 点运行 (美股收盘后)
+  workflow_dispatch: # 支持手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: 安装 uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: 安装依赖并采集数据
+        run: |
+          uv run python database.py
+      - name: 提交数据库更新
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add stocks.db
+          git commit -m "自动更新美股数据: $(date)" || exit 0
+          git push
