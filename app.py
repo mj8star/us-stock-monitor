@@ -57,7 +57,7 @@ def load_data(symbols, days=30):
 # --- 3. 侧边栏 ---
 st.sidebar.title("🛠️ 监控台")
 all_options = list(INDICES.keys()) + WATCH_LIST
-selected_symbols = st.sidebar.multiselect("1. 选择监控对象", options=all_options, default=["^GSPC", "AAPL", "NVDA"])
+selected_symbols = st.sidebar.multiselect("1. 选择监控对象", options=all_options, default=["^GSPC", "^IXIC", "^RUT"])
 history_days = st.sidebar.slider("2. 时间回溯 (天)", 7, 365, 60)
 
 METRICS_MAP = {
