@@ -7,6 +7,7 @@ from database import INDICES, WATCH_LIST
 # --- 页面配置 ---
 st.set_page_config(page_title="XX美股监控系统", layout="wide")
 
+
 # --- 1. 配置：代码与中文名称映射 ---
 # 你可以在这里持续添加需要监控的股票中文名
 STOCKS_NAME_MAP = {
